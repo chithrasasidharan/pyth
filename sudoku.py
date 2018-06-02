@@ -24,16 +24,27 @@ puzzle = [ 0,0,7,0,0,0,3,0,0,
 cells = {}
 colour = {}
 i=0
+btn_txt = tk.StringVar()
+
+def clickAndAdd(i):
+    btn_txt.set(str(i))
+
 
 def clickBad(col):
-        messagebox.showinfo(window,col)
+    if(col=="red"):
+        k=1
+        for i in range(3):
+            for j in range(3):
+                btn = Button(window,text = str(k),
+                    command = lambda k=k:clickAndAdd(k))
+                btn.grid(row=i+1,column=j+1)
+                k=k+1
 
-x = 0
-y = 0
-b = [[0 for x in range(9)] for y in range(9)]
+# b = [[0 for x in range(9)] for y in range(9)]
 for rowindex in range(9):
     for colindex in range(9):
-                cell = Frame(center,bg = "white",highlightbackground = "black", highlightthickness = 1,width=50,height =50, padx=3,pady=3)
+                cell = Frame(center,bg = "white",highlightbackground = "black", 
+                    highlightthickness = 1,width=50,height =50, padx=3,pady=3)
                 if(puzzle[i]==0):
                         puzzle[i]=' '
                         colour[i] = "red"
@@ -41,12 +52,18 @@ for rowindex in range(9):
                         colour[i] = "black"
                 if (rowindex in (0,1,2,6,7,8) and colindex in (3,4,5) or (rowindex in (3,4,5) and colindex in (0,1,2,6,7,8))):
                         cell.configure(background = "lightgreen")
-                        b[rowindex][colindex] = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "lightgreen",bg = "lightgreen",borderwidth=0,height =2,width =2,command = lambda:clickBad(colour[rowindex][colindex]))
+                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),
+                            highlightbackground = "lightgreen",bg = "lightgreen",
+                            borderwidth=0,height =2,width =2,
+                            command = lambda rowindex =rowindex, colindex=colindex :clickBad(colour[rowindex*9+colindex]))
                 else:
                         cell.configure(background="white")
-                        b[x][y] = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "white",borderwidth = 0,bg = "white",height =2,width=2,command = lambda:clickBad(colour[x][y]))
+                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),
+                            highlightbackground = "white",borderwidth = 0,bg = "white",
+                            height =2,width=2,
+                            command = lambda:clickBad(colour[rowindex*9+colindex]))
 
-                b[x][y].grid(row = rowindex,column = colindex)
+                b.grid(row = rowindex,column = colindex)
                 i=i+1
                 cell.grid(row=rowindex,column=colindex)
 
