@@ -24,12 +24,15 @@ puzzle = [ 0,0,7,0,0,0,3,0,0,
 cells = {}
 colour = {}
 i=0
-# label = Label(window)
-# label.grid(row = 0,column = 0)
+
 def clickBad(col):
         messagebox.showinfo(window,col)
+
+x = 0
+y = 0
+b = [[0 for x in range(9)] for y in range(9)]
 for rowindex in range(9):
-	for colindex in range(9):
+    for colindex in range(9):
                 cell = Frame(center,bg = "white",highlightbackground = "black", highlightthickness = 1,width=50,height =50, padx=3,pady=3)
                 if(puzzle[i]==0):
                         puzzle[i]=' '
@@ -38,13 +41,12 @@ for rowindex in range(9):
                         colour[i] = "black"
                 if (rowindex in (0,1,2,6,7,8) and colindex in (3,4,5) or (rowindex in (3,4,5) and colindex in (0,1,2,6,7,8))):
                         cell.configure(background = "lightgreen")
-                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "lightgreen",bg = "lightgreen",borderwidth=0,height =2,width =2,command = lambda:clickBad(colour[i]))
-
+                        b[rowindex][colindex] = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "lightgreen",bg = "lightgreen",borderwidth=0,height =2,width =2,command = lambda:clickBad(colour[rowindex][colindex]))
                 else:
                         cell.configure(background="white")
-                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "white",borderwidth = 0,bg = "white",height =2,width=2)
+                        b[x][y] = Button(cell,fg = colour[i],text = str(puzzle[i]),highlightbackground = "white",borderwidth = 0,bg = "white",height =2,width=2,command = lambda:clickBad(colour[x][y]))
 
-                b.grid(row = rowindex,column = colindex)
+                b[x][y].grid(row = rowindex,column = colindex)
                 i=i+1
                 cell.grid(row=rowindex,column=colindex)
 
@@ -55,7 +57,7 @@ def clicked():
 btn_text = tk.StringVar()
 def paused():
 	val = btn_text.get()
-	if(val=="Pause"):
+	if(val == "Pause"):
 		messagebox.showinfo('Paused', "Your window is now Paused!!!")
 		btn_text.set("Resume")
 	else:
