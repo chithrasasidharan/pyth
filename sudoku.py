@@ -7,9 +7,9 @@ import time
 
 window = Tk()
 window.title('Sudoku')
-window.geometry('600x600')
+window.geometry('700x700')
 
-center = Frame(window, bg = 'white',width = 450,height = 450,padx=30,pady=30)
+center = Frame(window, bg = 'white',width = 900,height = 900,padx=30,pady=30)
 center.grid(row=0,column = 0)
 puzzle = [ 0,0,7,0,0,0,3,0,0,
            0,0,0,0,0,0,0,0,0,
@@ -25,22 +25,36 @@ cells = {}
 colour = {}
 i=0
 btn_txt = tk.StringVar()
+def clickAndAdd(b,r,c,i):
+    if(i==0):
+        b.configure(text = ' ')
+    else:
+        b.configure(text = str(i))
+        cs = [0 for x in range(9)]
+        for x in range(9):
+            if(b[x][c]!="0" and x!=r):
+                cs[x] = int(b[x][c])
+            # else:
+                cs[x] = 0
+        for x in range(9):
+            if(cs[x]==0):
+                messagebox.showinfo(window,"err")
 
-def clickAndAdd(i):
-    btn_txt.set(str(i))
 
 
-def clickBad(col):
+def clickBad(b,r,c,col):
     if(col=="red"):
         k=1
         for i in range(3):
             for j in range(3):
                 btn = Button(window,text = str(k),
-                    command = lambda k=k:clickAndAdd(k))
+                    command = lambda k=k:clickAndAdd(b[r][c],r,c,k))
                 btn.grid(row=i+1,column=j+1)
                 k=k+1
+        btn = Button(window,text = '0',command = lambda k=0:clickAndAdd(b[r][c],r,c,k))
+        btn.grid(row=i+2,column=j)
 
-# b = [[0 for x in range(9)] for y in range(9)]
+b = [[0 for x in range(9)] for y in range(9)]
 for rowindex in range(9):
     for colindex in range(9):
                 cell = Frame(center,bg = "white",highlightbackground = "black", 
@@ -52,18 +66,16 @@ for rowindex in range(9):
                         colour[i] = "black"
                 if (rowindex in (0,1,2,6,7,8) and colindex in (3,4,5) or (rowindex in (3,4,5) and colindex in (0,1,2,6,7,8))):
                         cell.configure(background = "lightgreen")
-                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),
+                        b[rowindex][colindex] = Button(cell,fg = colour[i],text = str(puzzle[i]),
                             highlightbackground = "lightgreen",bg = "lightgreen",
-                            borderwidth=0,height =2,width =2,
-                            command = lambda rowindex =rowindex, colindex=colindex :clickBad(colour[rowindex*9+colindex]))
+                            borderwidth=0,height =2,width =2)
                 else:
                         cell.configure(background="white")
-                        b = Button(cell,fg = colour[i],text = str(puzzle[i]),
-                            highlightbackground = "white",borderwidth = 0,bg = "white",
-                            height =2,width=2,
-                            command = lambda:clickBad(colour[rowindex*9+colindex]))
-
-                b.grid(row = rowindex,column = colindex)
+                        b[rowindex][colindex] = Button(cell,fg = colour[i],text = str(puzzle[i]),
+                            highlightbackground = "white",bg = "white",
+                            borderwidth=0,height =2,width =2)
+                b[rowindex][colindex].configure(command = lambda b =b,rowindex = rowindex, colindex=colindex:clickBad(b,rowindex,colindex,colour[rowindex*9+colindex]))
+                b[rowindex][colindex].grid(row = rowindex,column = colindex)
                 i=i+1
                 cell.grid(row=rowindex,column=colindex)
 
@@ -80,7 +92,6 @@ def paused():
 	else:
 		messagebox.showinfo('Paused', "Your window is now resumed!!!")
 		btn_text.set("Pause")
-
 
 
 # hint = Button(window,text = "Hint",bg = "blue", fg ="white", width = 10,height = 3,command = clicked)
