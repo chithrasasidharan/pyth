@@ -24,21 +24,59 @@ puzzle = [ 0,0,7,0,0,0,3,0,0,
 cells = {}
 colour = {}
 i=0
-btn_txt = tk.StringVar()
+
+def ErrorCheckGrid(b,r,c):
+    cs = [0 for x in range(9)]
+    r1 = -1
+    c1 = -1
+    if(r%3==1):
+        r1 = r-1
+    if(c%3==1):
+        c1 = c-1 
+    if(r%3==2):
+        r1 = r-2
+    if(c%3==2):
+        c1 = c-2
+    if(r%3==0):
+        r1 = r
+    if(c%3==0):
+        c1 = c
+    x = 0
+    for i in range(3):
+        for j in range(3):
+            if((i+r1)!=r and (j+c1)!=c):
+                cs[x] = b[i+r1][j+c1].cget('text')
+                x = x+1
+    for x in range(9):
+        if(cs[x]==b[r][c].cget('text')):
+            return 1
+
+
+def errorCheck(b,r,c):
+    cs = [0 for x in range(9)]
+    for x in range(9):
+        if(x!=r):
+            cs[x] = b[x][c].cget('text')
+    for x in range(9):
+        if(cs[x]==b[r][c].cget('text')):
+            return 1
+    for x in range(9):
+        if(x!=c):
+            cs[x] = b[r][x].cget('text')
+    for x in range(9):
+        if(cs[x]==b[r][c].cget('text')):
+            return 1
+    if(ErrorCheckGrid(b,r,c)==1):
+        return 1
+
 def clickAndAdd(b,r,c,i):
     if(i==0):
-        b.configure(text = ' ')
+        b[r][c].configure(text = ' ')
     else:
-        b.configure(text = str(i))
-        cs = [0 for x in range(9)]
-        for x in range(9):
-            if(b[x][c]!="0" and x!=r):
-                cs[x] = int(b[x][c])
-            # else:
-                cs[x] = 0
-        for x in range(9):
-            if(cs[x]==0):
-                messagebox.showinfo(window,"err")
+        b[r][c].configure(text = str(i))
+        if(errorCheck(b,r,c)):
+            messagebox.showinfo(window,"err")
+            b[r][c].configure(text=' ')
 
 
 
@@ -48,7 +86,7 @@ def clickBad(b,r,c,col):
         for i in range(3):
             for j in range(3):
                 btn = Button(window,text = str(k),
-                    command = lambda k=k:clickAndAdd(b[r][c],r,c,k))
+                    command = lambda k=k:clickAndAdd(b,r,c,k))
                 btn.grid(row=i+1,column=j+1)
                 k=k+1
         btn = Button(window,text = '0',command = lambda k=0:clickAndAdd(b[r][c],r,c,k))
