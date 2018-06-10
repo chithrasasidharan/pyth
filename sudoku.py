@@ -45,8 +45,8 @@ def paused():
         state = False
         for x in range(9):
             for y in range(9):
-                if(b[x][y].cget('fg')=="red"):
-                    b[x][y].configure(bg="red")
+                if(b[x][y].cget('fg')=="blue"):
+                    b[x][y].configure(bg="blue")
                 else:
                     b[x][y].configure(bg="black")
         # messagebox.showinfo('Paused', "Your window is now Paused!!!")
@@ -156,6 +156,10 @@ grid=[[0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0]]
      
 solveSudoku(grid)
+solution =  [[0 for x in range(9)] for y in range (9)]
+for i in range(9):
+    for j in range(9):
+        solution[i][j] = grid[i][j]
 for p in range(60):
     i = random.randint(0,8)
     j = random.randint(0,8)
@@ -245,13 +249,15 @@ def check(b):
 
 l = Label(window, text="Its an error!",font=('Helvetica',20))
 def clickAndAdd(b,r,c,i):
+    if(b[r][c].cget('fg')=="red"):
+        b[r][c].configure(fg="blue")
     if(i==0):
         b[r][c].configure(text=' ')
         l.grid_forget()
     else:
         b[r][c].configure(text = str(i))
-        if(errorCheck(b,r,c)):
-            l.grid(row=2,column=0)
+        # if(errorCheck(b,r,c)):
+            # l.grid(row=2,column=0)
             # messagebox.showinfo(window,"err")
             # b[r][c].configure(text=' ')
 
@@ -267,7 +273,9 @@ btn.grid(row=i+4,column=j+9)
 i=0
 def clickBad(b,r,c,col):
     l.grid_forget()
-    if(col=="red"):
+    if(b[r][c].cget('fg')=="red"):
+        b[r][c].configure(fg="blue")
+    if(col=="blue"):
         
         k=1
         for i in range(3):
@@ -286,7 +294,7 @@ for rowindex in range(9):
                     highlightthickness = 1,width=50,height =50, padx=3,pady=3)
                 if(puzzle[i]==0):
                         puzzle[i]=' '
-                        colour[i] = "red"
+                        colour[i] = "blue"
                 else:
                         colour[i] = "black"
                 if (rowindex in (0,1,2,6,7,8) and colindex in (3,4,5) or (rowindex in (3,4,5) and colindex in (0,1,2,6,7,8))):
@@ -310,6 +318,11 @@ def clicked():
 
 btn_text = tk.StringVar()
 
+def validate():
+    for i in range(9):
+        for j in range(9):
+            if(b[i][j].cget('text')!=str(solution[i][j])):
+                b[i][j].configure(fg="red")
 
 def clearCmd():
     if(pause.cget('text')=="Resume"):
@@ -317,16 +330,23 @@ def clearCmd():
         return
     for x in range(9):
         for y in range(9):
-            if(b[x][y].cget('fg')=="red"):
+            if(b[x][y].cget('fg')=="blue"):
                 b[x][y].configure(text=' ')
 # buttonplace = Frame(window, bg = 'white',width =100,height = 510,padx=950,pady=30)
 # buttonplace.grid(row = 0,column = 10)
-
+def solveCmd():
+    for x in range(9):
+        for y in range(9):
+            b[x][y].configure(text=str(solution[x][y]))
 
 pause = Button(ce,textvariable = btn_text,bg = "blue",fg="white", width = 10,height = 3,command = paused)
 btn_text.set("Pause")
 pause.grid(row = 0, column = 0)
 clear = Button(ce,text = "Clear all",bg = "blue", fg ="white",width = 10,height = 3,command = clearCmd)
 clear.grid(row = 0,column = 2)
+solve = Button(ce,text = "Solve",bg = "blue",fg = "white",width = 10,height = 3,command = solveCmd)
+solve.grid(row = 0,column=3)
+valid = Button(ce,text = "valid",bg = "blue",fg = "white",width = 10,height = 3,command = validate)
+valid.grid(row = 0,column=4)
 
 window.mainloop()
