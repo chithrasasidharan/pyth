@@ -130,28 +130,21 @@ def solveSudoku(a):
      
     for num in range(1,10):
          
-        # if looks promising
         if(not errorCheck(a,row,col,num)):
              
-            # make tentative assignment
             a[row][col]=num
  
-            # return, if sucess, ya!
             if(solveSudoku(a)):
                 return True
  
-            # failure, unmake & try again
             a[row][col] = 0
              
-    # this triggers backtracking        
     return False
 
 
      
-    # creating a 2D array for the grid
 grid=[[0 for x in range(9)]for y in range(9)]
      
-    # assigning values to the grid
 grid=[[0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
@@ -162,7 +155,6 @@ grid=[[0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0]]
      
-    # if sucess print the grid
 solveSudoku(grid)
 for p in range(60):
     i = random.randint(0,8)
