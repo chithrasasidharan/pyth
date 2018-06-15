@@ -45,10 +45,14 @@ def paused():
         state = False
         for x in range(9):
             for y in range(9):
-                if(b[x][y].cget('fg')=="blue"):
+                if(b[x][y].cget('fg')=="black"):
+                    b[x][y].configure(bg="black")
+                elif(b[x][y].cget('fg')=="red"):
+                    b[x][y].configure(fg="blue");
                     b[x][y].configure(bg="blue")
                 else:
-                    b[x][y].configure(bg="black")
+                    b[x][y].configure(bg="blue")
+
         # messagebox.showinfo('Paused', "Your window is now Paused!!!")
         btn_text.set("Resume")
     else:
@@ -75,6 +79,7 @@ def findEmptyLoc(a,l):
                 l[1] = j
                 return True
     return False
+
 def ErrorCheckGrid(a,r,c,k):
     cs = [0 for x in range(9)]
     r1 = -1
@@ -128,15 +133,12 @@ def solveSudoku(a):
     row=l[0]
     col=l[1]
      
-    for num in range(1,10):
-         
+    for n in range(1,10):
+        num = random.randint(1,9)
         if(not errorCheck(a,row,col,num)):
-             
             a[row][col]=num
- 
             if(solveSudoku(a)):
                 return True
- 
             a[row][col] = 0
              
     return False
@@ -160,7 +162,7 @@ solution =  [[0 for x in range(9)] for y in range (9)]
 for i in range(9):
     for j in range(9):
         solution[i][j] = grid[i][j]
-for p in range(60):
+for p in range(98):
     i = random.randint(0,8)
     j = random.randint(0,8)
     if(grid[i][j]!=0):
@@ -181,15 +183,6 @@ for i in range(9):
         puzzle[m] = grid[i][j]
         m+=1
 
-# puzzle = [ 0,0,7,0,0,0,3,0,0,
-#            0,0,0,0,0,0,0,0,0,
-#            1,4,6,0,7,0,2,5,8,
-#            0,0,4,8,0,5,1,0,0,
-#            7,0,8,0,6,0,5,0,2,
-#            0,6,0,0,4,0,0,3,0,
-#            0,0,0,0,0,0,0,0,0,
-#            2,0,0,7,5,4,0,0,6,
-#            0,0,0,6,0,9,0,0,0 ]
 
 cells = {}
 colour = {}
@@ -319,6 +312,9 @@ def clicked():
 btn_text = tk.StringVar()
 
 def validate():
+    if(pause.cget('text')=="Resume"):
+        messagebox.showinfo(window,"Cant valid while paused")
+        return
     for i in range(9):
         for j in range(9):
             if(b[i][j].cget('text')!=str(solution[i][j])):
@@ -335,8 +331,13 @@ def clearCmd():
 # buttonplace = Frame(window, bg = 'white',width =100,height = 510,padx=950,pady=30)
 # buttonplace.grid(row = 0,column = 10)
 def solveCmd():
+    if(pause.cget('text')=="Resume"):
+        messagebox.showinfo(window,"Cant solve while paused")
+        return
     for x in range(9):
         for y in range(9):
+            if(b[x][y].cget('fg')=="red"):
+                b[x][y].configure(fg = "blue")
             b[x][y].configure(text=str(solution[x][y]))
 
 pause = Button(ce,textvariable = btn_text,bg = "blue",fg="white", width = 10,height = 3,command = paused)
