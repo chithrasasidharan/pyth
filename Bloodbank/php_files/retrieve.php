@@ -7,12 +7,10 @@ if ($conn->connect_error) {
 }
 $sql = "SELECT * FROM user WHERE uid='{$_GET['uid']}';";
  if ($res =  mysqli_query($conn,$sql)) {
-    while ($res->num_rows > 0) {
-            $row = $res->fetch_array()
-            echo json_encode($row)   ;
-           
+    if ($res->num_rows > 0) {
+    	$row = $res->fetch_array();
+       echo json_encode($row);
         $res->free();
-        }
     }
     else {
         echo "No matching records are found.";
