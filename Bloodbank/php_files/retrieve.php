@@ -11,16 +11,12 @@ $sql = "SELECT * FROM user WHERE uid='{$_GET['uid']}';";
         while ($row = $res->fetch_array()) 
         {
             
-            echo json_encode($row['uid'])   ;
-            echo json_encode($row['Name']) ;
-            echo json_encode($row['Age'] );
-            echo json_encode($row['Gender'] );
-            echo json_encode($row['BloodGroup'] );
-            echo json_encode($row['District'] );
-            echo json_encode($row['State'] );
-            echo json_encode($row['PhoneNumber'] );
-            echo json_encode($row['Donor']);
-           
+          $ans = array( $row['uid'],$row['Name'],$row['Age'],
+          	$row['Gender'], $row['BloodGroup'],$row['District'],
+          	  $row['State'], $row['PhoneNumber'], $row['Donor'] ) ;
+          $json = json_encode($ans);
+          echo $json;
+       
         }
         $res->free();
     }
