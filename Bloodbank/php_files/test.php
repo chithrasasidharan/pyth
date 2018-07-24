@@ -28,10 +28,10 @@ if ($res =  mysqli_query($conn,$sql)) {
             echo "<td>".$row['Name']."</td>";
             echo "<td>".$row['Age']."</td>";
             echo "<td>".$row['Gender']."</td>";
-            echo "<td>".$row['Blood Group']."</td>";
+            echo "<td>".$row['BloodGroup']."</td>";
             echo "<td>".$row['District']."</td>";
             echo "<td>".$row['State']."</td>";
-            echo "<td>".$row['Phone Number']."</td>";
+            echo "<td>".$row['PhoneNumber']."</td>";
             echo "<td>".$row['Donor']."</td>";
             echo "</tr>";
         }
