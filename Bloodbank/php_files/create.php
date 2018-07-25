@@ -2,8 +2,8 @@
 $conn = new mysqli("localhost", "newuser", "cleartext_password", "Bloodbank");
  
 if ($conn->connect_error) {
-    die("ERROR: Could not connect. "
-                          .$conn->connect_error);
+    $a = array('errorCode' =>"1",'errorMsg'=>"$conn->connect_error");
+    echo die(json_encode($a));
 }
 $sql = "INSERT INTO `user` (Name,Age,Gender,BloodGroup,District,State,PhoneNumber, Donor)
 
@@ -16,8 +16,8 @@ VALUES
   echo "Query executed successfuly" ;
 }
 else {
-    echo "ERROR: Could not able to execute $sql. "
-                                             .$mysqli->error;
+   $a = array('errorCode' =>"3",'errorMsg'=>"ERROR: Could not able to execute $sql.".$mysqli->error);
+        echo (json_encode($a));
 }
 $mysqli->close();
 ?>

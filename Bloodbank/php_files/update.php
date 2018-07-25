@@ -2,31 +2,29 @@
 $conn = new mysqli("localhost", "newuser", "cleartext_password", "Bloodbank");
  
 if ($conn->connect_error) {
-    die("ERROR: Could not connect. "
-                          .$conn->connect_error);
+    $a = array('errorCode' =>"1",'errorMsg'=>"$conn->connect_error");
+	echo die(json_encode($a));
 }
-public function update($data, $table, $where){
-	$data_str = '';
-
-	foreach ($data as $column=> $value) {
-		if(!empty($data_str))
-			$data_str.=',';
+$a = array('Name' => $_POST['Name'] ,'Age'=>$_POST['Age'],'Gender'=>$_POST['Gender'], 'BloodGroup'=>$_POST['BloodGroup'],'District'=>$_POST['District'],'State'=>$_POST['State'],'PhoneNumber'=>$_POST['PhoneNumber'],'Donor'=>$_POST['Donor']);
+$sql = "UPDATE user SET";
+$comma = " ";
+foreach ($a as $key => $value) {
+	if(!empty($value)){
+		$sql = $sql. $comma. " $key ='".$value ."' ";
+		$comma = ",";
 	}
-	$sql = "UPDATE $table SET $data_str WHERE $where";
-	mysqli_query($sql) or die(mysql_error());
-	return true;
 }
-// $allowed = array('Name','PhoneNumber');
-// $data = $db->filterArray($_POST,$allowed);
-// $sql = "UPDATE user SET ?u uid = '{$_GET['uid']};";
 
-// update('{$_POST['Name']}',user,uid='{$_GET['uid']}');
-//  if ($res =  mysqli_query($conn,$sql)) {
-//   echo "Query executed successfuly" ;
-// }
-// else {
-//     echo "ERROR: Could not able to execute $sql. "
-//                                              .$mysqli->error;
-// }
+$sql = $sql. "WHERE uid ='".$_GET['uid']."' ";
+
+
+
+if ($res =  mysqli_query($conn,$sql)) {
+  echo "Query executed successfuly" ;
+}
+else {
+    $a = array('errorCode' =>"3",'errorMsg'=>"ERROR: Could not able to execute $sql.".$mysqli->error);
+		echo (json_encode($a));
+}
 $mysqli->close();
 ?>
