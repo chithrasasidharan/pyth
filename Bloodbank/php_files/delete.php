@@ -1,8 +1,11 @@
 <?php
 include 'db.php';
+$dbObj= new Database();
+$dbObj->connect();
+
 $sql = "DELETE FROM `user` WHERE uid = '{$_GET['uid']}'";
 
- if ($res =  mysqli_query($conn,$sql)) {
+ if ($res =  mysqli_query($dbObj->myconn,$sql)) {
   echo "Query executed successfuly" ;
 }
 else {

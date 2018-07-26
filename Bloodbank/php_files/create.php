@@ -1,5 +1,8 @@
 <?php
 include 'db.php';
+$dbObj= new Database();
+$dbObj->connect();
+
 $sql = "INSERT INTO `user` (Name,Age,Gender,BloodGroup,District,State,PhoneNumber, Donor)
 
 VALUES
@@ -7,7 +10,7 @@ VALUES
     '{$_POST['Gender']}','{$_POST['BloodGroup']}',
     '{$_POST['District']}','{$_POST['State']}','{$_POST['PhoneNumber']}','{$_POST['Donor']}');";
 
- if ($res =  mysqli_query($conn,$sql)) {
+ if ($res =  mysqli_query($dbObj->myconn,$sql)) {
   echo "Query executed successfuly" ;
 }
 else {
