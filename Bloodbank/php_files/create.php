@@ -10,7 +10,7 @@ VALUES
     '{$_POST['Gender']}','{$_POST['BloodGroup']}',
     '{$_POST['District']}','{$_POST['State']}','{$_POST['PhoneNumber']}','{$_POST['Donor']}');";
 
- if ($res =  mysqli_query($dbObj->myconn,$sql)) {
+ if ($res =  $dbObj->executeQuery($sql)) {
   echo "Query executed successfuly" ;
 }
 else {
