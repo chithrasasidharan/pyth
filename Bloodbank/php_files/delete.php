@@ -6,6 +6,6 @@ $dbObj->connect();
 $sql = "DELETE FROM `user` WHERE uid = '{$_GET['uid']}'";
 
 $res =  $dbObj->executeQuery($sql);
-echo "QUery success";
+echo json_encode($res);
 $mysqli->close();
 ?>

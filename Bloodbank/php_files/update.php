@@ -17,7 +17,7 @@ $sql = $sql. "WHERE uid ='".$_GET['uid']."' ";
 
 
 $res =  $dbObj->executeQuery($sql);
-echo "Query executed successfuly" ;
+echo json_encode($res) ;
 
 $mysqli->close();
 ?>
