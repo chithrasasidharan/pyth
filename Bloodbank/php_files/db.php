@@ -8,25 +8,25 @@
  
 
  class Database{
+	private $myconn;
  	function connect(){
-		 $user = "newuser";
-		 $pass = "cleartext_password";
-		 $server = "localhost";
-		 $db = "Bloodbank";
-
+		$user = "newuser";
+		$pass = "cleartext_password";
+		$server = "localhost";
+		$db = "Bloodbank";
 		$conn = new mysqli($server,$user,$pass,$db);
 		if($conn->connect_error){
 			$a = array('errorCode' =>"1",'errorMsg'=>"$conn->connect_error");
 			echo die(json_encode($a));
 		}
 		else{
+			echo "connected";
 			$this->myconn = $conn;
 
 		}
-		return $this->myconn;
  	}
  	function close(){
- 		mysqli_close($CONN);
+ 		mysqli_close($this->myconn);
  	}
 
  	function executeQuery($sql){
@@ -38,6 +38,10 @@
 			$a = array('errorCode' =>"3",'errorMsg'=>"ERROR: Could not able to execute $sql.".$mysqli->error);
 				echo (json_encode($a));
 		}
+ 	}
+ 	function returnID(){
+ 		return $this->myconn->insert_id;
+
  	}
 
  }
