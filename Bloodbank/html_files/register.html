@@ -1,4 +1,6 @@
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/mnt/E23043AE3043890D/python/Bloodbank/css_files/register.css"> 
+
 
 <!DOCTYPE html>
 <html>
@@ -6,72 +8,146 @@
 	<title>Register</title>
 </head>
 <body>
-	<div class="heading">My Profile</div>
-	<!-- <div class="padd">	 -->
-		<label><b>Name</b></label>
-			<input type="text" placeholder="Enter your name" name="name" required>
-		<label><b>Age</b></label>
-			<input type="" placeholder="Enter your name" name="name" required>
+ <div class="container">
+ <!---heading---->
+     <header class="heading"> Registration-Form</header><hr></hr>
+	<!---Form starting----> 
+	<div class="row ">
+	 <!--- For Name---->
+         <div class="col-sm-12">
+             <div class="row">
+			     <div class="col-xs-4">
+          	         <label class="name">Name </label> </div>
+		         <div class="col-xs-8">
+		             <input type="text" name="name" id="name" placeholder="Enter your Name" class="form-control ">
+             </div>
+		      </div>
+		 </div>
+		 
+		 
+         <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+                     <label class="age">Age</label></div>
+				<div class ="col-xs-8">	 
+		             <input type="text" name="age" id="ager" placeholder="Enter your Age" class="form-control">
+                </div>
+		     </div>
+		 </div>
+         <div class="col-sm-12">
+		     <div class ="row">
+                 <div class="col-xs-4 ">
+			       <label class="gender">Gender</label>
+				 </div>
+			 
+			     <div class="col-xs-4 male">	 
+				     <input type="radio" name="gender"  id="gender" value="boy" >Male</input>
+				 </div>
+				 
+				 <div class="col-xs-4 female">
+				     <input type="radio"  name="gender" id="gender" value="girl" >Female</input>
+			     </div>
+			
+		  	 </div>
+		 </div>
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4 ">
+                     <label class="state">State</label></div>
+				<div class ="col-xs-8">	 
+		            <select class="form-control">
+			  			<option value="ap">Andhra Pradesh </option>
+			  			<option value="arp">Arunachal Pradesh</option>
+			 			<option value="asm">Assam</option>
+			  			<option value="b">Bihar</option>
+			  			<option value="c">Chattisgarh</option>
+			  			<option value="gj">Gujrat</option>
+			  			<option value="goa">Goa</option>
+			  			<option value="h">Haryana</option>
+			  			<option value="hp">Himachal Pradesh</option>
+			  			<option value="jk">Jammu Kashmir</option>
+			  			<option value="jd">Jharkhand</option>
+			  			<option value="ka">Karnataka</option>
+			  			<option value="kl" selected>Kerala</option>
+			  			<option value="mp">Madhya Pradesh</option>
+			  			<option value="mh">Maharashtra</option>
+			  			<option value="mn">Manipur</option>
+			  			<option value="mg">Meghalaya</option>
+			  			<option value="mz">Mizoram</option>
+			  			<option value="nl">Nagaland</option>
+			  			<option value="od">Odisha</option>
+			  			<option value="pb">Punjab</option>
+			  			<option value="rj">Rajasthan</option>
+			  			<option value="sk">Sikkim</option>
+			  			<option value="tn">Tamil Nadu</option>
+			  			<option value="tlg">Telangana</option>
+			  			<option value="tp">Tripura</option>
+			  			<option value="up">Uttar Pradesh</option>
+			  			<option value="uk">Utharakhand</option>
+			  			<option value="wb">West Bengal</option>
+					</select> 
+                </div>
+		     </div>
+		 </div>
 
-		<legend><b>Gender</b></legend>
-		<label for="Female">Female</label> 
-			<input type="radio" name="gender" id=female value="female" checked>
-		<label for="Male">Male</label> 
-			<input type="radio" name="gender" id=Male value="Male" >
-		<label for="Others">Others</label> 
-			<input type="radio" name="gender" id=Others value="Others">
-		
-		<label><b>District</b></label>
-			<input type="text	" placeholder="Enter your name" name="name" required>
-		<label><b>State</b></label>
-		<select>
-  			<option value="ap">Andhra Pradesh </option>
-  			<option value="arp">Arunachal Pradesh</option>
- 			<option value="asm">Assam</option>
-  			<option value="b">Bihar</option>
-  			<option value="c">Chattisgarh</option>
-  			<option value="gj">Gujrat</option>
-  			<option value="goa">Goa</option>
-  			<option value="h">Haryana</option>
-  			<option value="hp">Himachal Pradesh</option>
-  			<option value="jk">Jammu Kashmir</option>
-  			<option value="jd">Jharkhand</option>
-  			<option value="ka">Karnataka</option>
-  			<option value="kl" selected>Kerala</option>
-  			<option value="mp">Madhya Pradesh</option>
-  			<option value="mh">Maharashtra</option>
-  			<option value="mn">Manipur</option>
-  			<option value="mg">Meghalaya</option>
-  			<option value="mz">Mizoram</option>
-  			<option value="nl">Nagaland</option>
-  			<option value="od">Odisha</option>
-  			<option value="pb">Punjab</option>
-  			<option value="rj">Rajasthan</option>
-  			<option value="sk">Sikkim</option>
-  			<option value="tn">Tamil Nadu</option>
-  			<option value="tlg">Telangana</option>
-  			<option value="tp">Tripura</option>
-  			<option value="up">Uttar Pradesh</option>
-  			<option value="uk">Utharakhand</option>
-  			<option value="wb">West Bengal</option>
-		</select> 
-		<label><b>Mobile Number</b></label>
-			<input type="text" placeholder="Enter your Mobile number" name="name" required>
-		<label><b>Blood Group</b></label>
-			<select>
-				<option value ="A+">A+</option>
-				<option value ="A-">A-</option>
-				<option value ="B+">B+</option>
-				<option value ="B-">B-</option>
-				<option value ="AB+">AB+</option>
-				<option value ="AB-">AB-</option>
-				<option value ="O+">O+</option>
-				<option value ="O-">O-</option>
-			</select>
-		
-		<label><b>Donor</b></label>
-			<input type="checkbox" checked="checked" name="donor" required>I am a Donor
 
-	<!-- </div> -->
+		
+     <!-----For email---->
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+		             <label class="dist" >District</label></div>
+			     <div class="col-xs-8"	>	 
+			          <input type="dist" name="dist"  id="dt"placeholder="Enter your district" class="form-control" >
+		         </div>
+		     </div>
+		 </div>
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4 ">
+                     <label class="blood">Blood Group</label></div>
+				<div class ="col-xs-8 bld">	 
+		            <select class="form-control ">
+						<option value ="A+">A+</option>
+						<option value ="A-">A-</option>
+						<option value ="B+">B+</option>
+						<option value ="B-">B-</option>
+						<option value ="AB+">AB+</option>
+						<option value ="AB-">AB-</option>
+						<option value ="O+">O+</option>
+						<option value ="O-">O-</option>
+					</select>
+                </div>
+		     </div>
+		 </div>
+	 <!-----For Password and confirm password---->
+          <div class="col-sm-12">
+		         <div class="row">
+				     <div class="col-xs-4">
+		 	              <label class="ph">Phone</label></div>
+					  <div class="col-xs-8">
+				             <input type="phone" name="phone" id="phone" placeholder="Enter your Ph Number" class="form-control">
+				 	  </div>
+          		</div>
+		  </div>
+
+		  <div class="col-sm-12">
+		  	<div class="row">
+		  		<div class="col-xs-4">
+		  			<label class="donor">Donor</label></div>
+		  		<div class="col-xs-8">
+		  			<input type="checkbox" checked="checked" name="donor" required>I am a Donor
+		  		</div>
+		  	</div>
+		  </div>
+		  
+		     
+	 </div>	 
+		  	 <div class="col-sm-12">
+		         <div class="btn btn-warning sbutton">Submit</div>
+		   </div>
+		 		 
+		 
+</div>
 </body>
 </html>
