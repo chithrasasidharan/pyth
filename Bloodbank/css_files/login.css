@@ -1,0 +1,23 @@
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.topnav .btn{
+	float: right;
+ 	 padding: 10px 10px;
+}
+
+.button{
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 100%
+
+}
+
+body{
+	background-color: pink;
+}
