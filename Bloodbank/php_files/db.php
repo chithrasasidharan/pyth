@@ -35,7 +35,7 @@
 		    
 		}
 		else {
-			$a = array('errorCode' =>"3",'errorMsg'=>"ERROR: Could not able to execute $sql.".$mysqli->error);
+			$a = array('errorCode' =>"3",'errorMsg'=>"ERROR: Could not execute $sql.".$mysqli->error);
 				echo (json_encode($a));
 		}
  	}
@@ -43,6 +43,8 @@
  		return $this->myconn->insert_id;
 
  	}
+
+ 	
 
  }
 ?>
