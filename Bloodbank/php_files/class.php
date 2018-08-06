@@ -4,7 +4,7 @@ $dbObj = new Database();
 class Blood{
 
 	function create($dbObj){
-		$sql = "INSERT INTO `user` (Name,Username,Age,Gender,BloodGroup,District,State,PhoneNumber, Donor) VALUES ('{$_POST['Name']}','{$_POST['Username']}' '{$_POST['Age']}','{$_POST['Gender']}','{$_POST['BloodGroup']}','{$_POST['District']}','{$_POST['State']}','{$_POST['PhoneNumber']}','{$_POST['Donor']}');";
+		$sql = "INSERT INTO `user` (Name,Username,Age,Gender,BloodGroup,District,State,PhoneNumber, Donor) VALUES ('{$_POST['Name']}','{$_POST['Username']}', '{$_POST['Age']}','{$_POST['Gender']}','{$_POST['BloodGroup']}','{$_POST['District']}','{$_POST['State']}','{$_POST['PhoneNumber']}','{$_POST['Donor']}');";
     		$res = $dbObj->executeQuery($sql);
 			$id  = $dbObj->returnID();
 			echo json_encode($id) ;
@@ -60,6 +60,23 @@ class Blood{
 		else {
 		    $a = array('errorCode' =>"2",'errorMsg'=>"No matching recd");
 		    echo (json_encode($a));
+		}
+	}
+
+	function login($dbObj){
+		// session_start();
+		if (isset($_POST['Username']) and isset($_POST['Password'])){
+			$sql = "SELECT * FROM `user` WHERE Username='{$_POST['Username']}' and Password='{$_POST['Password']}'";
+			$res = $dbObj->executeQuery($sql);
+			if($res->num_rows>0){
+				$row = $res->fetch_assoc();
+				echo json_encode($row);
+				$res->free;
+			}
+			else {
+		    $a = array('errorCode' =>"2",'errorMsg'=>"No matching recd");
+		    echo (json_encode($a));
+			}
 		}
 	}
 
