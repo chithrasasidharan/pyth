@@ -3,5 +3,5 @@
 	$b = new Blood();
 	$dbObj->connect();
 	$b->login($dbObj);
-	// $dbObj->close();
+	$dbObj->close();
 ?>

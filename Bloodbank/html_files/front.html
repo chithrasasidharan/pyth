@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/mnt/E23043AE3043890D/python/Bloodbank/css_files/front.css" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <!DOCTYPE html>
@@ -8,12 +10,13 @@
 	<title>BloodBank</title>
 </head>
 <body>
+<!-- <form action="/mnt/E23043AE3043890D/python/Bloodbank/html_files/login.html" method="POST"> -->
 	<div class="heading" ><b>WELCOME TO BLOODBANK</b></div>
 	<div class="form-group">	
 		<label>
 			<b>Username</b>
 		</label>
-		<input type="text" placeholder="Enter username" name="uname" required class="form-control">
+		<input type="text" placeholder="Enter username" name="uname" required class="form-control" id="uname">
 	</div>
 	<div class="form-group">
 		<label>
@@ -22,13 +25,14 @@
 	</div>
 	<div class = "form-group">
 		<b>Password </b>
-		<input type="password" placeholder="********" name="pswd" required class="form-control">
+		<input type="password" placeholder="********" name="pswd" required class="form-control" id="pwd">
 	</div>
 	<div class="form-group">Forgot <a href="#">password?
 	</a></div>
-	<DIV class="form-group"><button type="submit" class="btn btn-block btn-primary">Login</button></DIV>
+	<DIV class="form-group"><button type="submit" class="btn btn-block btn-primary" id="log">Login</button></DIV>
 	<div class="form-group"><center><b>OR</b></center></div>
 	<div class="form-group"><button type="submit" class="btn btn-block btn-primary">Register</button></div>
-
+<!-- </form> -->
+  <script type="text/javascript" src="/mnt/E23043AE3043890D/python/Bloodbank/js_files/front.js"></script>
 </body>
 </html>

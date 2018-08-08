@@ -68,10 +68,18 @@ class Blood{
 		if (isset($_POST['Username']) and isset($_POST['Password'])){
 			$sql = "SELECT * FROM `user` WHERE Username='{$_POST['Username']}' and Password='{$_POST['Password']}'";
 			$res = $dbObj->executeQuery($sql);
+			$data=mysql_num_rows($res);
 			if($res->num_rows>0){
 				$row = $res->fetch_assoc();
 				echo json_encode($row);
 				$res->free;
+				if($data==1){
+					echo (json_encode($data));
+				}else{
+					echo (json_encode($data));
+					// echo "Username or Password is wrong...!!!!";
+				}
+				return $data;
 			}
 			else {
 		    $a = array('errorCode' =>"2",'errorMsg'=>"No matching recd");
